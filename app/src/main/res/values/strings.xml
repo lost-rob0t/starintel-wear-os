@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StarIntel</string>
+    <string name="tile_label">StarIntel Stats</string>
+    <string name="tile_description">StarIntel document and people counts</string>
+    <string name="widget_overview_label">StarIntel Overview</string>
+    <string name="widget_documents_label">StarIntel Documents</string>
+    <string name="widget_people_label">StarIntel People</string>
+    <string name="widget_dtype_label">StarIntel Top Type</string>
+    <string name="widget_description">Live StarIntel statistics</string>
+    <string name="complication_documents_label">StarIntel Documents</string>
+    <string name="complication_people_label">StarIntel People</string>
+</resources>
