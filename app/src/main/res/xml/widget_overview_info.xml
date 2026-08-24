@@ -5,7 +5,7 @@
     icon="@drawable/ic_starintel"
     label="@string/app_name"
     preferredType="SMALL">
-    <container type="SMALL" />
-    <container type="LARGE" />
-    <container type="FULLSCREEN" />
+    <container type="SMALL" previewImage="@drawable/ic_starintel" />
+    <container type="LARGE" previewImage="@drawable/ic_starintel" />
+    <container type="FULLSCREEN" previewImage="@drawable/ic_starintel" />
 </wearwidget-provider>

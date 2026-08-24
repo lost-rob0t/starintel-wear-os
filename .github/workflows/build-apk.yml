@@ -21,11 +21,33 @@ jobs:
           java-version: "17"
 
       - uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: "15859902"
 
-      - name: Install Android SDK 37
+      - name: Install Android build tools
+        run: sdkmanager "build-tools;36.0.0"
+
+      - name: Install Android 17 Cinnamon Bun platform
+        shell: bash
         run: |
-          yes | sdkmanager --licenses >/dev/null
-          sdkmanager "platforms;android-37" "build-tools;36.0.0"
+          set -euo pipefail
+          zip="$RUNNER_TEMP/platform-CinnamonBun_r05.zip"
+          unpack="$RUNNER_TEMP/cinnamonbun-platform"
+          curl -fL --retry 3 \
+            -o "$zip" \
+            "https://dl.google.com/android/repository/platform-CinnamonBun_r05.zip"
+          echo "e2b204742c79147f694281af9e30fa8d8b7e96eb  $zip" | sha1sum -c -
+          rm -rf "$unpack"
+          mkdir -p "$unpack"
+          unzip -q "$zip" -d "$unpack"
+          jar="$(find "$unpack" -type f -name android.jar -print -quit)"
+          test -n "$jar"
+          platform_dir="$(dirname "$jar")"
+          rm -rf "$ANDROID_HOME/platforms/android-CinnamonBun"
+          mkdir -p "$ANDROID_HOME/platforms/android-CinnamonBun"
+          cp -a "$platform_dir"/. "$ANDROID_HOME/platforms/android-CinnamonBun"/
+          test -f "$ANDROID_HOME/platforms/android-CinnamonBun/android.jar"
+          cat "$ANDROID_HOME/platforms/android-CinnamonBun/source.properties"
 
       - name: Unit tests
         run: ./gradlew testDebugUnitTest
