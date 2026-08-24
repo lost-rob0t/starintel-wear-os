@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <service
+            android:name=".surface.OverviewWidgetService"
+            android:exported="true"
+            android:icon="@drawable/ic_starintel"
+            android:label="@string/widget_overview_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/widget_overview_info" />
+        </service>
+
+        <service
+            android:name=".surface.DocumentsWidgetService"
+            android:exported="true"
+            android:icon="@drawable/ic_starintel"
+            android:label="@string/widget_documents_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/widget_documents_info" />
+        </service>
+
+        <service
+            android:name=".surface.PeopleWidgetService"
+            android:exported="true"
+            android:icon="@drawable/ic_starintel"
+            android:label="@string/widget_people_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/widget_people_info" />
+        </service>
+
+        <service
+            android:name=".surface.TopDTypeWidgetService"
+            android:exported="true"
+            android:icon="@drawable/ic_starintel"
+            android:label="@string/widget_dtype_label"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
+            </intent-filter>
+            <meta-data
+                android:name="androidx.glance.wear.widget.provider"
+                android:resource="@xml/widget_dtype_info" />
+        </service>
+    </application>
+</manifest>

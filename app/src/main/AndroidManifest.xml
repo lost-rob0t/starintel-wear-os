@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Stable Tile fallback -->
+        <!-- Wear OS 3+ Tile; this is the primary widget-like surface on Watch5 Pro. -->
         <service
             android:name=".surface.StarIntelStatsTileService"
             android:description="@string/tile_description"
@@ -42,64 +42,7 @@
             </intent-filter>
         </service>
 
-        <!-- Wear OS 7 widgets -->
-        <service
-            android:name=".surface.OverviewWidgetService"
-            android:exported="true"
-            android:icon="@drawable/ic_starintel"
-            android:label="@string/widget_overview_label"
-            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
-            <intent-filter>
-                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
-            </intent-filter>
-            <meta-data
-                android:name="androidx.glance.wear.widget.provider"
-                android:resource="@xml/widget_overview_info" />
-        </service>
-
-        <service
-            android:name=".surface.DocumentsWidgetService"
-            android:exported="true"
-            android:icon="@drawable/ic_starintel"
-            android:label="@string/widget_documents_label"
-            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
-            <intent-filter>
-                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
-            </intent-filter>
-            <meta-data
-                android:name="androidx.glance.wear.widget.provider"
-                android:resource="@xml/widget_documents_info" />
-        </service>
-
-        <service
-            android:name=".surface.PeopleWidgetService"
-            android:exported="true"
-            android:icon="@drawable/ic_starintel"
-            android:label="@string/widget_people_label"
-            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
-            <intent-filter>
-                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
-            </intent-filter>
-            <meta-data
-                android:name="androidx.glance.wear.widget.provider"
-                android:resource="@xml/widget_people_info" />
-        </service>
-
-        <service
-            android:name=".surface.TopDTypeWidgetService"
-            android:exported="true"
-            android:icon="@drawable/ic_starintel"
-            android:label="@string/widget_dtype_label"
-            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
-            <intent-filter>
-                <action android:name="androidx.glance.wear.action.BIND_WIDGET_PROVIDER" />
-            </intent-filter>
-            <meta-data
-                android:name="androidx.glance.wear.widget.provider"
-                android:resource="@xml/widget_dtype_info" />
-        </service>
-
-        <!-- Watch-face complications -->
+        <!-- Watch-face complications work on Watch5 Pro / Wear OS 6. -->
         <service
             android:name=".surface.DocumentsComplicationService"
             android:exported="true"
@@ -112,7 +55,7 @@
             <meta-data
                 android:name="android.support.wearable.complications.SUPPORTED_TYPES"
                 android:value="SHORT_TEXT,LONG_TEXT" />
-                <meta-data
+            <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
                 android:value="900" />
         </service>

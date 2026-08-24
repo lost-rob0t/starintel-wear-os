@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  apk:
+  watch5-pro-apk:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +27,7 @@ jobs:
       - name: Install Android build tools
         run: sdkmanager "build-tools;36.0.0"
 
-      - name: Install Android 17 Cinnamon Bun platform
+      - name: Install Android 17 Cinnamon Bun compile platform
         shell: bash
         run: |
           set -euo pipefail
@@ -47,16 +47,25 @@ jobs:
           mkdir -p "$ANDROID_HOME/platforms/android-CinnamonBun"
           cp -a "$platform_dir"/. "$ANDROID_HOME/platforms/android-CinnamonBun"/
           test -f "$ANDROID_HOME/platforms/android-CinnamonBun/android.jar"
-          cat "$ANDROID_HOME/platforms/android-CinnamonBun/source.properties"
 
-      - name: Unit tests
-        run: ./gradlew testDebugUnitTest
+      - name: Unit tests - Watch5 Pro / Wear OS 6
+        run: ./gradlew testCompatDebugUnitTest
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug
+      - name: Build optimized Watch5 Pro sideload APK
+        run: ./gradlew assembleCompatSideload
 
-      - name: Upload installable APK
+      - name: Validate and show APK size
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="app/build/outputs/apk/compat/sideload/app-compat-sideload.apk"
+          test -f "$apk"
+          unzip -t "$apk" >/dev/null
+          ls -lh "$apk"
+          sha256sum "$apk"
+
+      - name: Upload Watch5 Pro installable APK
         uses: actions/upload-artifact@v4
         with:
-          name: starintel-wear-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: starintel-watch5-pro-apk
+          path: app/build/outputs/apk/compat/sideload/app-compat-sideload.apk
